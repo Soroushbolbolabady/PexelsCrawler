@@ -6,14 +6,23 @@ import time
 
 
 
-# Set up the web driver (make sure to download the appropriate driver for your browser)
-options = webdriver.ChromeOptions()
-options.add_experimental_option("detach", True)
-driver = webdriver.Chrome(options=options)
-driver.maximize_window()
+
+def main():
+
+    #get user input
+    query = input("Enter the query: ")
+    image_number = int(input("Enter the number of images: "))
+
+    scrape_images(f'https://www.pexels.com/search/{query}/', image_number, 'images')
+
+
+
 
 def scrape_images(url, num_images, save_path):
-
+    options = webdriver.ChromeOptions()
+    options.add_experimental_option("detach", True)
+    driver = webdriver.Chrome(options=options)
+    driver.maximize_window()
     # Open the website
     driver.get(url)
     image_urls = []
@@ -47,14 +56,10 @@ def scrape_images(url, num_images, save_path):
             
 
 
-#get user input
-query = input("Enter the query: ")
-image_number = int(input("Enter the number of images: "))
+    # Close the web driver
+    driver.quit()
 
 
 
-scrape_images(f'https://www.pexels.com/search/{query}/', image_number, 'images')
-
-
-# Close the web driver
-driver.quit()
+if __name__ == '__main__':
+    main()
