@@ -31,11 +31,10 @@ def scrape_images(url, num_images, save_path):
         image_urls = [image.get_attribute('src') for image in images]
 
         driver.execute_script("scrollBy(0, 300);")
-        time.sleep(0.1)
+        time.sleep(0.01)
         if len(image_urls) >= num_images:
             break
     # Create the directory to save the images
-    # os.makedirs(save_path, exist_ok=True)
     save_path = save_path + '/'
     # Download the images
     for i, image_url in enumerate(image_urls[:num_images]):
